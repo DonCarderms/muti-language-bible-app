@@ -1,0 +1,22 @@
+@font-face {
+    font-family: RobotoSlab;
+    src: url(../fonts/Roboto_Slab/RobotoSlab-VariableFont_wght.ttf);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: RobotoSlab;
+}
+
+header>div {
+    display: flex;
+}
+
+li {
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+}
