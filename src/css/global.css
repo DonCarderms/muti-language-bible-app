@@ -9,14 +9,53 @@
     font-family: RobotoSlab;
 }
 
-header>div {
+:root {
+    --primary-900: #3E2723;
+    --primary-800: #4E342E;
+    --primary-700: #5D4037;
+    --primary-600: #6D4C41;
+    --primary-500: #795548;
+    --primary-400: #8D6E63;
+    --primary-300: #A1887F;
+    --primary-200: #BCAAA4;
+    --primary-100: #D7CCC8;
+    --primary-50: #EFEBE9;
+    --secondary-900: #1C3038;
+    --secondary-800: #2C454F;
+    --secondary-700: #3A5863;
+    --secondary-600: #486C79;
+    --secondary-500: #537B8A;
+    --secondary-400: #6D8E9B;
+    --secondary-300: #86A3AE;
+    --secondary-200: #A7BDC6;
+    --secondary-100: #C7D8DE;
+    --secondary-50: #E6F0F5;
+    --alert: #D32F2F;
+    --success: #388E3C;
+    --white: #ffffff;
+    --black: #000000;
+}
+
+/* h1 {
+    font-size: 1.5rem;
+} */
+
+.flex {
     display: flex;
 }
 
-li {
-    cursor: pointer;
+.justify-center {
+    justify-content: center;
 }
 
-.container {
-    display: flex;
+.align-center {
+    align-items: center;
+}
+
+.space-around {
+    justify-content: space-around;
+}
+
+.space-between {
+    justify-content: space-between;
 }

@@ -8,14 +8,12 @@ const elements = {
     content: document.querySelector('[data-js="main-content"]')
 }
 
-let book_state = {
+const book_state = {
     book_id: 'GEN',
     translation: 'web',
     book: 'Genesis',
     chapter: 1,
 }
-
-let currentChapter = 'default'
 
 
 const fetchData = async (endpoint) => {
@@ -50,7 +48,7 @@ const displayVerses = (verses, chapter) => {
         const p = document.createElement('p')
 
         span.textContent = verse
-        p.textContent = text
+        p.textContent = `${book_state.chapter}:${text}`
         wrapper.appendChild(span)
         wrapper.appendChild(p)
         elements.content.appendChild(wrapper)

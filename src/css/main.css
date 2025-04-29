@@ -1,0 +1,112 @@
+body {
+    width: 100%;
+    background-color: var(--primary-50);
+}
+
+header {
+    position: fixed;
+    background-color: var(--primary-900);
+    color: var(--primary-100);
+    height: 50px;
+    width: 100%;
+    font-size: 2rem;
+}
+
+header>div {
+    display: flex;
+}
+
+header h1,
+header span {
+    font-size: 0.5em;
+}
+
+select {
+    cursor: pointer;
+}
+
+.search {
+    padding: 10px;
+
+}
+
+input:hover {
+    border: 1px solid var(--secondary-500);
+}
+
+input::placeholder {
+    color: var(--primary-200);
+}
+
+input,
+select {
+    font-size: 0.5em;
+    outline: none;
+    color: var(--black);
+    border: 1px solid var(--primary-500);
+}
+
+label {
+    color: var(--secondary-100);
+    font-size: 0.4em;
+}
+
+
+.search,
+.translations {
+    height: 30px;
+    border-radius: 5px;
+}
+
+.input-div {
+    gap: 10px;
+}
+
+.container_book_list ul {
+    list-style: none;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 90vh;
+}
+
+li {
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.container_book_list li:hover {
+    color: var(--secondary-300);
+}
+
+.content {
+    max-width: 550px;
+    margin-top: 80px;
+}
+
+.container_book_list {
+    background-color: var(--primary-800);
+    color: var(--primary-100);
+    margin: 0 10px 0 0;
+    padding: 10px;
+    position: sticky;
+    top: 50px;
+    height: 90vh;
+    max-width: 900px;
+}
+
+.random-verse {
+    position: sticky;
+    top: 70px;
+    width: 270px;
+    min-width: 200px;
+    max-height: 300px;
+    border: 2px solid var(--primary-200);
+    margin: 20px;
+    padding: 10px;
+}
+
+@media (max-width: 1280px) {
+    /* … */
+}
