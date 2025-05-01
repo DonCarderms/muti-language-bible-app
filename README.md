@@ -1,1 +1,1 @@
-# A multi language bible
+# A multi language bible in plain js 
