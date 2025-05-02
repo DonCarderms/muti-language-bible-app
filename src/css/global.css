@@ -3,10 +3,9 @@
     src: url(../fonts/Roboto_Slab/RobotoSlab-VariableFont_wght.ttf);
 }
 
-* {
-    padding: 0;
-    margin: 0;
-    font-family: RobotoSlab;
+@font-face {
+    font-family: Montserrat;
+    src: url(../fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
 }
 
 :root {
@@ -34,11 +33,50 @@
     --success: #388E3C;
     --white: #ffffff;
     --black: #000000;
+    --ff: Montserrat;
+    --ff-verse: RobotoSlab;
 }
 
-/* h1 {
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: var(--ff);
+    font-weight: 400;
+    box-sizing: border-box;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+li,
+a,
+input,
+select,
+option {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1 {
     font-size: 1.5rem;
-} */
+    text-align: center;
+}
+
+input,
+select {
+    border: none;
+    outline: none;
+}
+
+.center {
+    margin: 0 auto;
+}
 
 .flex {
     display: flex;
@@ -58,4 +96,8 @@
 
 .space-between {
     justify-content: space-between;
+}
+
+.wrap {
+    flex-wrap: wrap;
 }
