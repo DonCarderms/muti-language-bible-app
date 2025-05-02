@@ -1,112 +1,49 @@
-body {
-    width: 100%;
-    background-color: var(--primary-50);
-}
-
 header {
-    position: fixed;
-    background-color: var(--primary-900);
-    color: var(--primary-100);
-    height: 50px;
-    width: 100%;
-    font-size: 2rem;
+    position: sticky;
+    top: 0 !important;
 }
 
-header>div {
-    display: flex;
-}
-
-header h1,
-header span {
-    font-size: 0.5em;
+main {
+    background-color: var(--primary-50);
+    padding: 0.2rem;
 }
 
 select {
-    cursor: pointer;
-}
-
-.search {
-    padding: 10px;
-
-}
-
-input:hover {
-    border: 1px solid var(--secondary-500);
-}
-
-input::placeholder {
-    color: var(--primary-200);
-}
-
-input,
-select {
-    font-size: 0.5em;
-    outline: none;
-    color: var(--black);
-    border: 1px solid var(--primary-500);
+    max-width: 250px;
+    padding: 0.5rem;
+    border: 1px solid gray;
+    border-radius: 0.2rem;
+    margin: 0.5rem;
 }
 
 label {
-    color: var(--secondary-100);
-    font-size: 0.4em;
-}
-
-
-.search,
-.translations {
-    height: 30px;
-    border-radius: 5px;
-}
-
-.input-div {
-    gap: 10px;
-}
-
-.container_book_list ul {
-    list-style: none;
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    flex-wrap: wrap;
-    height: 90vh;
-}
-
-li {
-    cursor: pointer;
-    margin: 0 5px;
-}
-
-.container_book_list li:hover {
-    color: var(--secondary-300);
+    font-size: 0.8rem;
 }
 
 .content {
-    max-width: 550px;
-    margin-top: 80px;
+    max-width: 700px;
+    width: 90%;
+    /* padding: 1rem; */
 }
 
-.container_book_list {
-    background-color: var(--primary-800);
-    color: var(--primary-100);
-    margin: 0 10px 0 0;
-    padding: 10px;
-    position: sticky;
-    top: 50px;
-    height: 90vh;
-    max-width: 900px;
+.content div {
+    gap: 0.5rem;
+    margin: 0 0 1rem 0;
 }
 
-.random-verse {
-    position: sticky;
-    top: 70px;
-    width: 270px;
-    min-width: 200px;
-    max-height: 300px;
-    border: 2px solid var(--primary-200);
-    margin: 20px;
-    padding: 10px;
+.content span {
+    color: var(--primary-200);
+    font-size: 1.2rem;
+    font-family: var(--ff-verse);
 }
 
-@media (max-width: 1280px) {
-    /* … */
+.content h1 {
+    font-family: var(--ff-verse);
+}
+
+.content p {
+    font-weight: 400;
+    font-family: var(--ff-verse);
+    display: inline-block;
+    margin: 0 0 0 1rem;
 }
