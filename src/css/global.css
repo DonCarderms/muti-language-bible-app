@@ -1,44 +1,175 @@
+/* fonts */
 @font-face {
     font-family: RobotoSlab;
     src: url(../fonts/Roboto_Slab/RobotoSlab-VariableFont_wght.ttf);
 }
 
-* {
-    padding: 0;
-    margin: 0;
-    font-family: RobotoSlab;
+@font-face {
+    font-family: Montserrat;
+    src: url(../fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
 }
 
+/* variables */
 :root {
-    --primary-900: #3E2723;
-    --primary-800: #4E342E;
-    --primary-700: #5D4037;
-    --primary-600: #6D4C41;
-    --primary-500: #795548;
-    --primary-400: #8D6E63;
-    --primary-300: #A1887F;
-    --primary-200: #BCAAA4;
-    --primary-100: #D7CCC8;
-    --primary-50: #EFEBE9;
-    --secondary-900: #1C3038;
-    --secondary-800: #2C454F;
-    --secondary-700: #3A5863;
-    --secondary-600: #486C79;
-    --secondary-500: #537B8A;
-    --secondary-400: #6D8E9B;
-    --secondary-300: #86A3AE;
-    --secondary-200: #A7BDC6;
-    --secondary-100: #C7D8DE;
-    --secondary-50: #E6F0F5;
+    --color-primary: hsl(20 16% 93%);
+    --color-secondary: hsl(20 83% 7%);
+    --color-tertiary: hsl(197 80% 20%);
+    --color-accent: hsl(9 80% 20%);
     --alert: #D32F2F;
     --success: #388E3C;
     --white: #ffffff;
     --black: #000000;
+    --ff: Montserrat;
+    --ff-verse: RobotoSlab;
+    --h1: 800 2rem/1.2em var(--ff-verse);
+    --h2: 600 1.5rem/1em var(--ff-verse);
+    --p: 400 1rem/1.5em var(--ff-verse);
+    --small-text: 400 0.8rem var(--ff);
+    --spacing-1: 0.25em;
+    --spacing-2: 0.5em;
+    --spacing-3: 0.75em;
+    --spacing-4: 1em;
+    --spacing-5: 1.25em;
+    --spacing-6: 1.75em;
+    --spacing-7: 2em;
+    --spacing-8: 2.25em;
+    --spacing-9: 2.5em;
+    --spacing-10: 3em;
 }
 
-/* h1 {
-    font-size: 1.5rem;
-} */
+.dark {
+    --color-primary: hsl(20 16% 7%);
+    --color-secondary: hsl(20 83% 93%);
+    --color-tertiary: hsl(197 80% 80%);
+    --color-accent: hsl(9 80% 80%);
+}
+
+/* reset css */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+li,
+a,
+input,
+select,
+option {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
+input,
+select {
+    border: none;
+    outline: none;
+}
+
+/* global css */
+body {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    font-family: var(--ff);
+    font: var(--p);
+}
+
+h1 {
+    font: var(--h1);
+}
+
+.margin-1 {
+    margin: var(--spacing-1) 0;
+}
+
+.margin-2 {
+    margin: var(--spacing-2) 0;
+}
+
+.margin-3 {
+    margin: var(--spacing-3) 0;
+}
+
+.margin-4 {
+    margin: var(--spacing-4) 0;
+}
+
+.margin-5 {
+    margin: var(--spacing-5) 0;
+}
+
+.margin-6 {
+    margin: var(--spacing-6) 0;
+}
+
+.margin-7 {
+    margin: var(--spacing-7) 0;
+}
+
+.margin-8 {
+    margin: var(--spacing-8) 0;
+}
+
+.margin-9 {
+    margin: var(--spacing-9) 0;
+}
+
+.padding-10 {
+    padding: var(--spacing-10) 0;
+}
+
+.padding-1 {
+    padding: var(--spacing-1) 0;
+}
+
+.padding-2 {
+    padding: var(--spacing-2) 0;
+}
+
+.padding-3 {
+    padding: var(--spacing-3) 0;
+}
+
+.padding-4 {
+    padding: var(--spacing-4) 0;
+}
+
+.padding-5 {
+    padding: var(--spacing-5) 0;
+}
+
+.padding-6 {
+    padding: var(--spacing-6) 0;
+}
+
+.padding-7 {
+    padding: var(--spacing-7) 0;
+}
+
+.padding-8 {
+    padding: var(--spacing-8) 0;
+}
+
+.padding-9 {
+    padding: var(--spacing-9) 0;
+}
+
+.padding-10 {
+    padding: var(--spacing-10) 0;
+}
+
+.center {
+    margin: 0 auto;
+}
 
 .flex {
     display: flex;
@@ -58,4 +189,8 @@
 
 .space-between {
     justify-content: space-between;
+}
+
+.wrap {
+    flex-wrap: wrap;
 }

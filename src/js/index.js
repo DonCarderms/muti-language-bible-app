@@ -1,130 +1,186 @@
-// import { API } from "./Api/index.js"
-const API = 'https://bible-api.com/data'
+import { API } from "./api/index.js";
 
 const elements = {
-    translations_select: document.getElementsByTagName('select').translations_select,
-    container: document.querySelector('[data-js="container_book_list"]'),
-    book_list: document.querySelector('[data-js="book_list"]'),
-    content: document.querySelector('[data-js="main-content"]')
-}
+  translations_select:
+    document.getElementsByTagName("select").translations_select,
+  container: document.querySelector('[data-js="container_book_list"]'),
+  books_select: document.querySelector('[data-js="book-select"]'),
+  content: document.querySelector('[data-js="main-content"]'),
+};
 
-const book_state = {
-    book_id: 'GEN',
-    translation: 'web',
-    book: 'Genesis',
-    chapter: 1,
-}
+const fragment = document.createDocumentFragment();
 
+const createElement = {
+  create() {
+    const el = document.createElement(this.type);
+    el.textContent = this.text;
+    document.body.append(el);
+    return el;
+  },
+  render() {},
+};
 
-const fetchData = async (endpoint) => {
-    const results = await fetch(endpoint)
-    const data = await results.json()
-    return data
-}
+const Element = (type, text) => {
+  const element = Object.create(createElement);
+
+  element.type = type;
+  element.text = text;
+
+  return element;
+};
+
+console.log(Element("h1", "loi"));
+
+const Book = {
+  id: "GEN",
+  translation: "web",
+  name: "Genesis",
+  chapter: 1,
+  books: [],
+  async fetchData(endpoint) {
+    const cache = {};
+    try {
+      const results = await fetch(endpoint);
+      const data = await results.json();
+      return data;
+    } catch (error) {
+      console.log(error.message);
+    }
+  },
+  async fetchBooks() {
+    elements.books_select.innerHTML = "";
+    const books_result = await Book.fetchData(`${API}/${this.translation}`);
+    const { books, translation } = await books_result;
+    if (!books[0].id || !books[0]?.name || !translation?.identifier) {
+      return;
+    }
+    this.update({ books: books, translation: translation.identifier });
+    this.displayBookList();
+  },
+  update(
+    { id, name, translation, chapter, books } = {
+      id: this.id,
+      name: this.name,
+      translation: this.translation,
+      chapter: this.chapter,
+      books: this.books,
+    }
+  ) {
+    this.id = id || this.id;
+    this.name = name || this.name;
+    this.translation = translation || this.translation;
+    this.chapter = chapter || this.chapter;
+    this.books = books || this.books;
+    return {
+      id: this.id,
+      translation: this.translation,
+      name: this.name,
+      chapter: this.chapter,
+      books: this.books,
+    };
+  },
+  displayBookList() {
+    this.books.forEach((book) => {
+      const { id, name } = book;
+
+      const books_options = document.createElement("option");
+
+      books_options.setAttribute("value", id);
+      id === this.id ? (books_options.selected = true) : "";
+
+      books_options.textContent = name;
+      fragment.appendChild(books_options);
+    });
+    elements.books_select.appendChild(fragment);
+  },
+  render() {},
+};
 
 (async () => {
-    const { translation, book_id, chapter, book } = book_state
+  const { translation, id, chapter, name } = Book;
 
-    const { translations } = await fetchData(API)
-    translations ? createTranslationsOptions(translations) : ''
+  const { translations } = await Book.fetchData(API);
+  translations ? createTranslationsOptions(translations) : "";
 
-    const { books } = await fetchData(`${API}/${translation}`)
-    books ? elements.container.appendChild(displayBookList(books, elements.book_list, 'web')) : ''
-
-    const { verses } = await fetchData(`${API}/${translation}/${book_id}/${chapter}`)
-    displayVerses(verses, `${book} ${chapter}`)
-})()
-
+  Book.fetchBooks();
+  const { verses } = await Book.fetchData(
+    `${API}/${translation}/${id}/${chapter}`
+  );
+  displayVerses(verses, `${name} ${chapter}`);
+})();
 
 const displayVerses = (verses, chapter) => {
-    elements.content.innerHTML = ''
-    const h1 = document.createElement('h1')
-    h1.textContent = chapter
-    elements.content.appendChild(h1)
-    verses.map((verse_object) => {
-        const { text, verse } = verse_object
-        const wrapper = document.createElement('div')
-        const span = document.createElement('span')
-        const p = document.createElement('p')
+  elements.content.innerHTML = "";
+  const h1 = document.createElement("h1");
+  h1.classList.add("margin-2");
+  h1.textContent = chapter;
+  elements.content.appendChild(h1);
+  verses.forEach((verse_object, index) => {
+    const { text, verse } = verse_object;
+    const wrapper = document.createElement("div");
+    const span = document.createElement("span");
+    const p = document.createElement("p");
 
-        span.textContent = verse
-        p.textContent = `${book_state.chapter}:${text}`
-        wrapper.appendChild(span)
-        wrapper.appendChild(p)
-        elements.content.appendChild(wrapper)
-    })
-
-}
+    span.textContent = `${Book.chapter}:${verse}`;
+    p.textContent = text;
+    wrapper.appendChild(span);
+    wrapper.appendChild(p);
+    fragment.appendChild(wrapper);
+  });
+  elements.content.appendChild(fragment);
+};
 
 const createTranslationsOptions = (translations) => {
-    translations.map((translation) => {
-        const { name, url, identifier, language, language_code } = translation
+  translations.forEach((translation) => {
+    const { name, identifier } = translation;
 
-        const translations_options = document.createElement('option')
-        const options_link = document.createElement('a')
+    const translations_options = document.createElement("option");
 
+    translations_options.setAttribute("value", identifier);
+    identifier === "web" ? (translations_options.selected = true) : "";
 
-        translations_options.setAttribute('value', identifier)
-        identifier === 'web' ? translations_options.selected = true : ''
-
-        options_link.setAttribute('href', url)
-
-        translations_options.textContent = name
-
-        translations_options.appendChild(options_link)
-        elements.translations_select.appendChild(translations_options)
-    })
-}
-
-
-
-const displayBookList = (books, book_list, book_list_id) => {
-    book_list.setAttribute('id', book_list_id)
-    book_list.innerHTML = ''
-    books.map((book) => {
-        const { id, name, url } = book
-        const li = document.createElement('li')
-
-        li.setAttribute('id', id)
-        li.setAttribute('name', name)
-        li.textContent = name
-
-        // li.appendChild(a)
-        book_list.appendChild(li)
-    })
-
-    return book_list
-}
+    translations_options.textContent = name;
+    fragment.appendChild(translations_options);
+  });
+  elements.translations_select.appendChild(fragment);
+};
 
 const chooseLanguage = async (e) => {
-    book_state.translation = e.target.value
-    const { books } = await fetchData(`${API}/${e.target.value}`)
-    books ? elements.container.appendChild(displayBookList(books, elements.book_list, e.target.value)) : ''
+  const { books } = await Book.fetchData(`${API}/${e.target.value}`);
+  const { id, name } = books[0];
 
-    const { id, name } = books[0]
+  const updated_book = Book.update({
+    translation: e.target.value,
+    id: id,
+    name: name,
+  });
 
-    book_state.book_id = id
-    book_state.book = name
+  const { verses } = await Book.fetchData(
+    `${API}/${updated_book.translation}/${updated_book.id}/${updated_book.chapter}`
+  );
 
-    const { translation, book_id, book, chapter } = book_state
-    const { verses } = await fetchData(`${API}/${translation}/${book_id}/${chapter}`)
-    displayVerses(verses, `${book} ${chapter}`)
-}
+  Book.fetchBooks();
+  displayVerses(verses, `${updated_book.name} ${updated_book.chapter}`);
+};
 
 const changeBook = async (e) => {
-    if (book_state.book_id !== e.target.id) {
-        const chapter_name = document.querySelector(`#${e.target.id}`).getAttribute('name')
+  if (Book.id !== e.target.id) {
+    const chapter_name = e.target.options[e.target.selectedIndex].text;
 
-        book_state.book_id = e.target.id
-        book_state.book = chapter_name
-        const { translation, book_id, chapter, book } = book_state
+    Book.update({
+      id: e.target.value,
+      name: chapter_name,
+    });
 
-        const { verses } = await fetchData(`${API}/${translation}/${book_id}/${chapter}`)
+    const { translation, id, chapter, name } = Book;
+    const { verses } = await Book.fetchData(
+      `${API}/${translation}/${id}/${chapter}`
+    );
 
-        displayVerses(verses, `${book} ${chapter}`)
-    }
-    return
-}
+    displayVerses(verses, `${name} ${chapter}`);
+  }
+  return;
+};
 
-elements.translations_select.addEventListener('change', chooseLanguage)
-elements.book_list.addEventListener('click', changeBook)
+elements.translations_select.addEventListener("change", chooseLanguage);
+elements.books_select.addEventListener("change", changeBook);

@@ -1,112 +1,131 @@
-body {
-    width: 100%;
-    background-color: var(--primary-50);
-}
-
 header {
-    position: fixed;
-    background-color: var(--primary-900);
-    color: var(--primary-100);
-    height: 50px;
-    width: 100%;
-    font-size: 2rem;
+    position: sticky;
+    top: 0 !important;
+    padding: 1rem;
+    font-family: var(--ff);
+    background-color: var(--color-primary);
+    border-bottom: 1px solid var(--color-secondary);
 }
 
-header>div {
-    display: flex;
-}
 
-header h1,
-header span {
-    font-size: 0.5em;
-}
-
-select {
+.logo {
+    width: 100px;
     cursor: pointer;
+    fill: var(--color-accent);
 }
 
-.search {
-    padding: 10px;
-
+.setting-icon {
+    width: 30px;
+    margin: 0 1rem;
 }
 
-input:hover {
-    border: 1px solid var(--secondary-500);
+#dark,
+.setting-icon {
+    fill: var(--color-primary);
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background: var(--color-accent);
+    padding: 6px;
+    border-radius: 20px;
+    box-shadow: 0px 2px 5px 1px gray;
 }
 
-input::placeholder {
-    color: var(--primary-200);
+.buy-me-a-coffe {
+    position: relative;
+    cursor: pointer;
+    background-color: var(--color-accent);
+    /* border: 1px solid var(--color-tertiary); */
+    border-radius: 5px;
+    padding: 0.5em 1em;
 }
 
-input,
+.coffe-border {
+    fill: var(--color-primary);
+}
+
+.buy-me-a-coffe a {
+    color: var(--color-primary);
+    margin: 0 1em 0 0;
+}
+
+.buy-me-a-coffe:hover {
+    transform: scale(1.02);
+    transition: all 1s;
+}
+
+.coffe-icon {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+main {
+    padding: 0.2rem;
+}
+
 select {
-    font-size: 0.5em;
-    outline: none;
-    color: var(--black);
-    border: 1px solid var(--primary-500);
+    max-width: 250px;
+    padding: 0.5em;
+    border: 1px solid var(--color-accent);
+    border-radius: 5px;
+    margin: 0.5rem;
 }
 
 label {
-    color: var(--secondary-100);
-    font-size: 0.4em;
-}
-
-
-.search,
-.translations {
-    height: 30px;
-    border-radius: 5px;
-}
-
-.input-div {
-    gap: 10px;
-}
-
-.container_book_list ul {
-    list-style: none;
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    flex-wrap: wrap;
-    height: 90vh;
-}
-
-li {
-    cursor: pointer;
-    margin: 0 5px;
-}
-
-.container_book_list li:hover {
-    color: var(--secondary-300);
+    font-size: var(--small-text);
 }
 
 .content {
-    max-width: 550px;
-    margin-top: 80px;
+    max-width: 700px;
+    width: 90%;
 }
 
-.container_book_list {
-    background-color: var(--primary-800);
-    color: var(--primary-100);
-    margin: 0 10px 0 0;
-    padding: 10px;
-    position: sticky;
-    top: 50px;
-    height: 90vh;
-    max-width: 900px;
+
+.content div {
+    gap: 0.5rem;
+    margin: 0 0 1rem 0;
 }
 
-.random-verse {
-    position: sticky;
-    top: 70px;
-    width: 270px;
-    min-width: 200px;
-    max-height: 300px;
-    border: 2px solid var(--primary-200);
-    margin: 20px;
-    padding: 10px;
+.content span {
+    color: var(--color-accent);
 }
 
-@media (max-width: 1280px) {
-    /* … */
+.content p {
+    display: inline-block;
+    margin: 0 0 0 1rem;
+}
+
+@media (min-width: 1200px) {
+    aside {
+        display: block;
+        position: fixed;
+        top: 72px;
+        right: 0;
+        border-left: 1px solid var(--color-secondary);
+        height: 100vh;
+        max-width: 300px;
+        padding: 1em;
+    }
+}
+
+@media (max-width: 1200px) {
+    aside {
+        display: none;
+    }
+}
+
+@media (max-width: 500px) {
+    .buy-me-a-coffe a {
+        font: var(--small-text);
+    }
+
+    .buy-me-a-coffe {
+        padding: var(--spacing-1) var(--spacing-3);
+    }
+
+    .coffe-icon {
+        width: 10px;
+        bottom: 6px;
+    }
 }
