@@ -1,5 +1,4 @@
-// import { API } from "./Api/index.js"
-const API = "https://bible-api.com/data";
+import { API } from "./api/index.js";
 
 const elements = {
   translations_select:
@@ -9,6 +8,29 @@ const elements = {
   content: document.querySelector('[data-js="main-content"]'),
 };
 
+const fragment = document.createDocumentFragment();
+
+const createElement = {
+  create() {
+    const el = document.createElement(this.type);
+    el.textContent = this.text;
+    document.body.append(el);
+    return el;
+  },
+  render() {},
+};
+
+const Element = (type, text) => {
+  const element = Object.create(createElement);
+
+  element.type = type;
+  element.text = text;
+
+  return element;
+};
+
+console.log(Element("h1", "loi"));
+
 const Book = {
   id: "GEN",
   translation: "web",
@@ -16,6 +38,7 @@ const Book = {
   chapter: 1,
   books: [],
   async fetchData(endpoint) {
+    const cache = {};
     try {
       const results = await fetch(endpoint);
       const data = await results.json();
@@ -66,9 +89,11 @@ const Book = {
       id === this.id ? (books_options.selected = true) : "";
 
       books_options.textContent = name;
-      elements.books_select.appendChild(books_options);
+      fragment.appendChild(books_options);
     });
+    elements.books_select.appendChild(fragment);
   },
+  render() {},
 };
 
 (async () => {
@@ -87,9 +112,10 @@ const Book = {
 const displayVerses = (verses, chapter) => {
   elements.content.innerHTML = "";
   const h1 = document.createElement("h1");
+  h1.classList.add("margin-2");
   h1.textContent = chapter;
   elements.content.appendChild(h1);
-  verses.forEach((verse_object) => {
+  verses.forEach((verse_object, index) => {
     const { text, verse } = verse_object;
     const wrapper = document.createElement("div");
     const span = document.createElement("span");
@@ -99,13 +125,14 @@ const displayVerses = (verses, chapter) => {
     p.textContent = text;
     wrapper.appendChild(span);
     wrapper.appendChild(p);
-    elements.content.appendChild(wrapper);
+    fragment.appendChild(wrapper);
   });
+  elements.content.appendChild(fragment);
 };
 
 const createTranslationsOptions = (translations) => {
   translations.forEach((translation) => {
-    const { name, url, identifier, language, language_code } = translation;
+    const { name, identifier } = translation;
 
     const translations_options = document.createElement("option");
 
@@ -113,8 +140,9 @@ const createTranslationsOptions = (translations) => {
     identifier === "web" ? (translations_options.selected = true) : "";
 
     translations_options.textContent = name;
-    elements.translations_select.appendChild(translations_options);
+    fragment.appendChild(translations_options);
   });
+  elements.translations_select.appendChild(fragment);
 };
 
 const chooseLanguage = async (e) => {
