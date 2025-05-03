@@ -1,2 +1,1 @@
-export const API = 'https://bible-api.com/data'
-
+export const API = "https://bible-api.com/data";
